@@ -35,6 +35,8 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   FocusNode? focusNode;
   PlaceType? placeType;
   String? language;
+  String? Function(String?)? validator;
+  TextInputAction? textInputAction;
 
   GooglePlaceAutoCompleteTextField(
       {required this.textEditingController,
@@ -54,7 +56,10 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
       this.containerHorizontalPadding,
       this.containerVerticalPadding,
       this.focusNode,
-      this.placeType,this.language='en'});
+      this.validator,
+      this.textInputAction,
+      this.placeType,
+      this.language = 'en'});
 
   @override
   _GooglePlaceAutoCompleteTextFieldState createState() =>
@@ -99,7 +104,9 @@ class _GooglePlaceAutoCompleteTextFieldState
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
-                focusNode: widget.focusNode ?? FocusNode(),
+                focusNode: widget.focusNode,
+                textInputAction: widget.textInputAction,
+                validator: widget.validator,
                 onChanged: (string) {
                   subject.add(string);
                   if (widget.isCrossBtnShown) {
@@ -297,6 +304,7 @@ class _GooglePlaceAutoCompleteTextFieldState
         this._overlayEntry?.remove();
       } catch (e) {}
     }
+    FocusScope.of(context).unfocus();
   }
 
   _showCrossIconWidget() {
