@@ -304,7 +304,6 @@ class _GooglePlaceAutoCompleteTextFieldState
         this._overlayEntry?.remove();
       } catch (e) {}
     }
-    FocusScope.of(context).unfocus();
   }
 
   _showCrossIconWidget() {
