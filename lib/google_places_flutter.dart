@@ -39,7 +39,8 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   TextInputAction? textInputAction;
 
   GooglePlaceAutoCompleteTextField(
-      {required this.textEditingController,
+      {super.key,
+      required this.textEditingController,
       required this.googleAPIKey,
       this.debounceTime: 600,
       this.inputDecoration: const InputDecoration(),
@@ -97,6 +98,7 @@ class _GooglePlaceAutoCompleteTextFieldState
           children: [
             Expanded(
               child: TextFormField(
+                key: widget.key,
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
