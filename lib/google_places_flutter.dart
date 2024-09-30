@@ -37,16 +37,17 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   String? language;
   String? Function(String?)? validator;
   TextInputAction? textInputAction;
+  VoidCallback? onEditingComplete;
 
   GooglePlaceAutoCompleteTextField(
       {super.key,
       required this.textEditingController,
       required this.googleAPIKey,
-      this.debounceTime: 600,
-      this.inputDecoration: const InputDecoration(),
+      this.debounceTime = 600,
+      this.inputDecoration = const InputDecoration(),
       this.itemClick,
       this.isLatLngRequired = true,
-      this.textStyle: const TextStyle(),
+      this.textStyle = const TextStyle(),
       this.countries,
       this.getPlaceDetailWithLatLng,
       this.itemBuilder,
@@ -60,7 +61,8 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
       this.validator,
       this.textInputAction,
       this.placeType,
-      this.language = 'en'});
+      this.language = 'en',
+      this.onEditingComplete});
 
   @override
   _GooglePlaceAutoCompleteTextFieldState createState() =>
@@ -104,6 +106,7 @@ class _GooglePlaceAutoCompleteTextFieldState
                 focusNode: widget.focusNode,
                 textInputAction: widget.textInputAction,
                 validator: widget.validator,
+                onEditingComplete: widget.onEditingComplete,
                 onChanged: (string) {
                   subject.add(string);
                   if (widget.isCrossBtnShown) {
